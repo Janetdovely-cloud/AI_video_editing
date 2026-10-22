@@ -635,8 +635,8 @@ body.editing [data-islot]{outline:2px dashed color-mix(in srgb,var(--t-gold) 80%
       <div class="fstep"><div class="no">02</div><div class="body"><h3>改字幕稿<span class="who you">你來做</span></h3><p>你刪減不要的段落、修正文字、調整包裝標記。字幕稿是一個純文字檔，好改也好看。</p><span class="say-label">改好後對 Claude 說</span><span class="subtitle">字幕稿改好了</span></div></div>
       <div class="fstep claude"><div class="no">03</div><div class="body"><h3>輸出初剪<span class="who claude">Claude 做</span></h3><p>產生初剪影片、SRT 字幕、轉場建議、包裝建議、AI 插圖與封面的提示詞，以及給 Claude in Chrome（Claude 的 Chrome 擴充功能）用的「Chrome生圖指令」。Claude 會接續執行，不用另外下指令。</p></div></div>
       <div class="fstep"><div class="no">04</div><div class="body"><h3>AI 插圖與剪映重剪<span class="who you">你來做</span><span class="who claude">Claude 做</span></h3><p>把「Chrome生圖指令」貼給 Claude in Chrome，讓它在 Gemini 網頁生圖、下載。下載好後告訴 Claude Code，它會把圖改名放進學員資料夾。接著檢視初剪，若需優化再到剪映人工微調，並匯出新的 SRT。</p><span class="say-label">圖下載好後對 Claude 說</span><span class="subtitle">插圖下載好了</span></div></div>
-      <div class="fstep claude"><div class="no">05</div><div class="body"><h3>剪映包裝<span class="who claude">Claude 做</span></h3><p>修字幕、放插圖、貼圖去背、老師照片、問題卡、章節、強調字、配樂、音效，最後對齊並匯出 1080p。</p><span class="say-label">對 Claude 說</span><span class="subtitle">新的時間軸跟字幕檔：…，剪映草稿叫『姓名』，幫我包裝</span></div></div>
-      <div class="fstep"><div class="no">06</div><div class="body"><h3>檢查長影音<span class="who you">你來做</span></h3><p>你從頭看一遍，確認沒問題後，Claude 會主動問要不要繼續做短影音。</p></div></div>
+      <div class="fstep claude"><div class="no">05</div><div class="body"><h3>剪映包裝<span class="who claude">Claude 做</span></h3><p>Claude 在背景用程式產生一份完整的剪映草稿：字幕、插圖、貼圖去背、老師照片、問題卡、章節、強調字、配樂、音效都放好，不會操作你的滑鼠鍵盤，這段時間電腦照常可用。</p><span class="say-label">對 Claude 說</span><span class="subtitle">新的時間軸跟字幕檔：…，剪映草稿叫『姓名』，幫我包裝</span></div></div>
+      <div class="fstep"><div class="no">06</div><div class="body"><h3>微調並匯出長影音<span class="who you">你來做</span></h3><p>在剪映打開新草稿，從頭看一遍、人工微調，再匯出 1080p。確認沒問題後，Claude 會主動問要不要繼續做短影音。</p></div></div>
       <div class="fstep claude"><div class="no">07</div><div class="body"><h3>短影音<span class="who claude">Claude 做</span></h3><p>把快問快答從正片裡剪出來，排成 9:16 的版面、變速 1.35 倍，並換算 SRT 的時間。</p><span class="say-label">對 Claude 說</span><span class="subtitle">剪短影音</span></div></div>
       <div class="fstep claude"><div class="no">08</div><div class="body"><h3>社群文案<span class="who claude">Claude 做</span></h3><p>依成品字幕撰寫 FB／IG 貼文、短版、YouTube 標題與說明、短影音說明。短影音完成後 Claude 會接續撰寫。</p></div></div>
       <div class="fstep"><div class="no">09</div><div class="body"><h3>人工修正後讓 Claude 學習<span class="who you">你來做</span><span class="who claude">Claude 做</span></h3><p>把你修正後的成品交給 Claude，它會比對差異，整理成規則，更新文件與工具。下次就不會再犯同樣的錯。</p><span class="say-label">對 Claude 說</span><span class="subtitle">我人工檢查後的檔案在…，看一下差異並優化 md 檔</span></div></div>
@@ -659,7 +659,7 @@ body.editing [data-islot]{outline:2px dashed color-mix(in srgb,var(--t-gold) 80%
     </div>
     <div class="scroll">
 <pre><span class="cm"># 主環境</span>
-pip install faster-whisper opencc-python-reimplemented numpy pillow
+pip install faster-whisper opencc-python-reimplemented numpy pillow pyJianYingDraft
 
 <span class="cm"># 對齊環境（FunASR，另建虛擬環境）</span>
 python -m venv tools\funasr_env
@@ -814,7 +814,7 @@ python -I -X utf8 tools\gemini_chrome.py prompt 輸出\影片名</pre>
   <div class="wrap">
     <div class="sec-head"><span class="step-chip">步驟 05</span><span class="hand-label">剪映包裝</span></div>
     <h2>把初剪變成成品：軌道由上到下</h2>
-    <p class="sub">告訴 Claude 新的 SRT 與剪映草稿名稱，它會依照包裝流程操作剪映。操作時請不要同時動滑鼠與鍵盤，以免互相干擾；可以隨時喊停，看效果後再繼續。</p>
+    <p class="sub">告訴 Claude 新的 SRT 與學員資料夾，它會在背景用程式產生一份新的剪映草稿，不會操作剪映畫面，你可以繼續用電腦。做好後在剪映首頁打開草稿，檢查、微調、匯出就好。</p>
     <div class="grid2" style="align-items:start">
       <div>
         <div class="stack">
@@ -834,6 +834,13 @@ python -I -X utf8 tools\gemini_chrome.py prompt 輸出\影片名</pre>
         <figcaption><b>剪映的時間軸與預覽區</b>　上方是字幕與包裝軌道，下方是主影片。中間的預覽畫面會隨播放頭即時更新。</figcaption>
       </figure>
     </div>
+    <h3 style="margin:30px 0 12px">背景產生草稿，你的電腦照常可用</h3>
+    <div class="grid3">
+      <div class="panel t"><span class="kicker">程式做</span><h3>產生完整草稿</h3><p><code>tools\build_jianying_draft.py</code> 依字幕稿標記與 SRT，把主影片、片頭片尾、回答字幕、插圖、B 貼圖去背與動畫、老師照片、問題卡、章節標題、強調字、配樂與音效全部放進一份新草稿。</p></div>
+      <div class="panel v"><span class="kicker">重剪過時</span><h3>先對回時間軸</h3><p>在剪映重剪過初剪的話，請先匯出影片。Claude 會用 <code>tools\recut_edl.py</code> 比對聲音，反推重剪後的時間軸，草稿的時間才會對上。</p></div>
+      <div class="panel a"><span class="kicker">你來做</span><h3>打開、微調、匯出</h3><p>每次都用新的草稿名稱，不會覆蓋你開過的草稿。剪映首頁沒看到的話，回首頁或重開剪映。</p></div>
+    </div>
+    <div class="callout warn" style="margin-top:18px"><p><b>程式還做不到、要手動補的</b>字幕稿 @包裝 裡的剪映貼圖、文字標註、軟體圖示；沒有音檔的音效；字幕切點與漏字；金句前補停頓；換了背景的影片要確認 B 貼圖與老師照片的位置；最後的匯出。</p></div>
   </div>
 </section>
 
@@ -841,7 +848,7 @@ python -I -X utf8 tools\gemini_chrome.py prompt 輸出\影片名</pre>
   <div class="wrap">
     <div class="sec-head"><span class="step-chip">步驟 05</span><span class="hand-label">包裝步驟</span></div>
     <h2>八個包裝步驟，每一步的設定值</h2>
-    <p class="sub">Claude 會依序完成以下步驟。點擊標題展開設定值，方便你檢查或手動修改；數值以實際畫面為準。左側色條對應時間軸上的軌道顏色。</p>
+    <p class="sub">產生草稿時，程式會自動套用以下設定值。點擊標題展開，方便你檢查或手動修改；數值以實際畫面為準。左側色條對應時間軸上的軌道顏色。</p>
     <div class="toolbar-row">
       <div class="tabs" id="foldFilter" role="group" aria-label="依素材類型篩選">
         <button type="button" data-k="all" aria-selected="true">全部</button>
@@ -858,10 +865,10 @@ python -I -X utf8 tools\gemini_chrome.py prompt 輸出\影片名</pre>
       <details class="fold" id="fold-teacher" data-kind="image" style="--c:var(--t-image)"><summary><span class="sn">②-2</span><div><span class="kind">插圖</span><h3>人物照片（圓形）</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>提到分校老師或授課講師名字時，放該老師的圓形大頭照，位置在畫面最空的地方（跟 B 貼圖同一區）。</p><p>從講到名字那句開始，到換下一位老師或這題結束。換人時直接換照片。提到老師的段落在字幕稿階段就會列出來，包裝時一起放，插圖放在左側小框或合適的空白處。最後一題的最後一兩句不放插圖，讓受訪者本人的畫面收尾，再接片尾。</p></div></details>
       <details class="fold" id="fold-sticker" data-kind="image" style="--c:var(--t-image)"><summary><span class="sn">③</span><div><span class="kind">貼圖</span><h3>B 貼圖去背</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>適用於純白背景的 B 貼圖。畫面 → 摳像 → 色度摳圖，取色器點白色背景，強度 8。</p><p>位置沒有固定規則，放在畫面最空的地方（例如空白牆面）。原則是：不擋人物、不擋字幕、不擋左上 logo 與章節標題，也不壓在背景有東西的地方。大小要看得清楚，通常約縮放 20～30%。</p><p>每支影片背景不同，先截圖看哪裡最空，同一支影片盡量統一放同一區。動畫設定：入場「放大」0.5 秒，出場「漸隱」0.5 秒。</p></div></details>
       <details class="fold" id="fold-q" data-kind="text" style="--c:var(--t-text)"><summary><span class="sn">④</span><div><span class="kind">文字與字幕</span><h3>問題卡</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>白色底：白色底素材放在白底軌，不透明度 70%，蓋住整段提問。</p><p>題目文字：文本 → 新建文本（不要用字幕，否則會跟回答字幕綁在一起）。字型辰宇落雁體、字號 15、黑字、白色描邊、置中，入場動畫「打字機 I」1.5 秒。</p><p>做好第一張後 <span class="kbd">Ctrl+C</span> 複製，移動播放頭後 <span class="kbd">Ctrl+V</span> 貼上，再改文字。換行的做法：先打第二行，按 <span class="kbd">Ctrl+Home</span> 打第一行，再按 Enter。</p></div></details>
-      <details class="fold" id="fold-chapter" data-kind="text" style="--c:var(--t-text)"><summary><span class="sn">⑤</span><div><span class="kind">文字與字幕</span><h3>章節標題</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>媒體 → 我的預設 → 「標題列_自我介紹1」（含 logo 與藍色筆刷底）。選取片段後改右側的文字欄。</p><p>字型一定要改成辰宇落雁體，預設的手寫字型會把繁體字顯示成簡體字形（例如「前後」變成「前后」）。</p><p>文字要從 logo 右邊開始：雙擊進入複合片段，在文字前面加全形空白「　」推右；或在後面加「　ㅤ」拉左。在外層改會被吃掉空白。</p></div></details>
+      <details class="fold" id="fold-chapter" data-kind="text" style="--c:var(--t-text)"><summary><span class="sn">⑤</span><div><span class="kind">文字與字幕</span><h3>章節標題</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>媒體 → 我的預設 → 「標題列_自我介紹1」（含 logo 與藍色筆刷底）。選取片段後改右側的文字欄。自動草稿會直接讀取這個預設（存在 <code>JianyingPro Drafts\JianyingPro Presets\Combination\Presets\</code>），每個章節複製一份並換上章節名稱。</p><p>字型一定要改成辰宇落雁體，預設的手寫字型會把繁體字顯示成簡體字形（例如「前後」變成「前后」）。</p><p>文字要從 logo 右邊開始：雙擊進入複合片段，在文字前面加全形空白「　」推右；或在後面加「　ㅤ」拉左。在外層改會被吃掉空白。</p></div></details>
       <details class="fold" id="fold-gold" data-kind="text" style="--c:var(--t-gold)"><summary><span class="sn">⑥</span><div><span class="kind">文字與字幕</span><h3>強調字（金句）</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>選取那句回答字幕，<b>先取消「套用到全部」</b>，再改：辰宇落雁體、字號 10、黃字、描邊、背景關。</p><p>金句前面要留一口氣，約 0.5～1 秒的停頓，不然金句會黏在前一句後面、沒有重量。初剪已自動保留原片的停頓；原片本來就太短的，初剪時會列出「金句前停頓不足」，在這一步補上。</p><p>補完停頓後，後面所有片段都會往後移，字幕、插圖、問題卡、章節要全部一起移。</p></div></details>
-      <details class="fold" id="fold-music" data-kind="audio" style="--c:var(--t-audio)"><summary><span class="sn">⑦</span><div><span class="kind">配樂與音效</span><h3>配樂</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>音頻 → 搜尋「田園之夢」（免費，已用過）或其他合適的音樂(自動判別音頻時長是否符合，輕音樂)。0:05 片頭後到片尾前，音量 −18dB，淡入 1 秒、淡出 2 秒。</p><p>VIP 音樂（如 Heart and Soul）常下載失敗，避開即可。</p></div></details>
-      <details class="fold" id="fold-sfx" data-kind="audio" style="--c:var(--t-audio)"><summary><span class="sn">⑧</span><div><span class="kind">配樂與音效</span><h3>音效</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>音頻 → 音效素材 → 搜尋。技巧：先把播放頭放到時間點，再按音效卡片上的「＋」。</p>
+      <details class="fold" id="fold-music" data-kind="audio" style="--c:var(--t-audio)"><summary><span class="sn">⑦</span><div><span class="kind">配樂與音效</span><h3>配樂</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>音頻 → 搜尋「田園之夢」（免費，已用過）或其他合適的音樂(自動判別音頻時長是否符合，輕音樂)。0:05 片頭後到片尾前，音量 −18dB，淡入 1 秒、淡出 2 秒。</p><p>VIP 音樂（如 Heart and Soul）常下載失敗，避開即可。</p><p>自動草稿使用 <code>素材\配樂\田園之夢.m4a</code>（從剪映快取取出的同一首），會自動放好音量與淡入淡出。</p></div></details>
+      <details class="fold" id="fold-sfx" data-kind="audio" style="--c:var(--t-audio)"><summary><span class="sn">⑧</span><div><span class="kind">配樂與音效</span><h3>音效</h3></div><span class="fold-hint"></span></summary><div class="fold-body"><p>音頻 → 音效素材 → 搜尋。技巧：先把播放頭放到時間點，再按音效卡片上的「＋」。</p><p>自動草稿使用 <code>素材\音效\</code> 裡的啵、仙塵、嗖、顫抖，依下表的位置自動放好。要加新的音效，先在剪映用過一次，或把音檔放進這個資料夾。</p>
         <div class="table scroll"><table>
           <tr><th>音效</th><th>位置</th></tr>
           <tr><td>啵</td><td>每張插圖出現的那一格</td></tr>
@@ -1109,6 +1116,10 @@ python -I -X utf8 tools\gemini_chrome.py prompt 輸出\影片名</pre>
     <details>
       <summary>C 槽空間不足</summary>
       <p>把 TEMP、TMP 環境變數改到其他磁碟（例如 D 槽），修改後重新開機，暫存檔就不會把系統碟塞滿。</p>
+    </details>
+    <details>
+      <summary>剪映首頁看不到 Claude 產生的草稿</summary>
+      <p>剪映開著的時候不會自動重新整理草稿列表。回到首頁，或關掉剪映再打開就會出現。字型沒有變成辰宇落雁體時，關掉草稿再開一次即可。</p>
     </details>
     <details>
       <summary>在剪映裡輸入數值時，片段被刪掉了</summary>
